@@ -18,8 +18,8 @@ fn get_mask(alphabet_size int) int {
 	return 0
 }
 
-// generate is a low-level function to change alphabet and ID size.
-pub fn generate(alphabet string, size int) !string {
+// generate_opt is a low-level function to change alphabet and ID size.
+pub fn generate_opt(alphabet string, size int) !string {
 	chars := alphabet.runes()
 
 	if alphabet.len == 0 || alphabet.len > 255 {
@@ -36,9 +36,9 @@ pub fn generate(alphabet string, size int) !string {
 	step := int(math.ceil(ceil_arg))
 
 	mut id := []rune{len: size}
-	
+
 	bytes := rand.read(step) or { return error(err.msg()) }
-	
+
 	mut j := 0
 	for true {
 		for i in 0..step {
@@ -56,19 +56,20 @@ pub fn generate(alphabet string, size int) !string {
 	return error('could not generate')
 }
 
-// must_generate is the same as generate but panics on error.
-pub fn must_generate(alphabet string, size int) string {
+// generate is the same as generate_opt but panics on error.
+pub fn generate(alphabet string, size int) string {
 	return generate(alphabet, size) or { panic(err.msg()) }
 }
 
+// Allows the id size to be passed as a parameter
 @[params]
 pub struct NanoIDParams {
 	size int = 21
 }
 
-// new generates secure URL-friendly unique ID.
+// new_opt generates secure URL-friendly unique ID.
 // Accepts optional parameter - length of the ID to be generated (21 by default).
-pub fn new(p NanoIDParams) !string {
+pub fn new_opt(p NanoIDParams) !string {
 	mut size := p.size
 	if size <= 0 {
 		return error('size must be positive integer')
@@ -84,7 +85,7 @@ pub fn new(p NanoIDParams) !string {
 	return id[..size].string()
 }
 
-// must is the same as new but panics on error.
-pub fn must(p NanoIDParams) string {
+// new is the same as new_opt but panics on error.
+pub fn new(p NanoIDParams) string {
 	return new(p) or { panic(err.msg()) }
 }
