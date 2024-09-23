@@ -58,7 +58,7 @@ pub fn generate_opt(alphabet string, size int) !string {
 
 // generate is the same as generate_opt but panics on error.
 pub fn generate(alphabet string, size int) string {
-	return generate(alphabet, size) or { panic(err.msg()) }
+	return generate_opt(alphabet, size) or { panic(err.msg()) }
 }
 
 // Allows the id size to be passed as a parameter
@@ -87,5 +87,5 @@ pub fn new_opt(p NanoIDParams) !string {
 
 // new is the same as new_opt but panics on error.
 pub fn new(p NanoIDParams) string {
-	return new(p) or { panic(err.msg()) }
+	return new_opt(p) or { panic(err.msg()) }
 }
