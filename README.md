@@ -9,7 +9,7 @@
 
 This package is V implementation of [NanoID](https://github.com/ai/nanoid)
 
-Generated from [Go Nanoid](https://github.com/matoous/go-nanoid)
+It was forked from [invipal's implemenation](https://github.com/invipal/nanoid), which itself was generated from [Go Nanoid](https://github.com/matoous/go-nanoid)
 
 **Safe.** It uses cryptographically strong random generator.
 
@@ -23,7 +23,7 @@ and has the same number of unique options in just 22 symbols instead of 36.
 Via vpm
 
 ```bash
-$ v install invipal.nanoid
+$ v install squidink7.nanoid
 ```
 
 ## Usage
@@ -31,13 +31,13 @@ $ v install invipal.nanoid
 Generate ID
 
 ```v
-id := nanoid.new() or { 'error' }
+id := nanoid.new()
 ```
 
 Generate ID with a custom alphabet and length
 
 ```v
-id := nanoid.generate('erzurum', 25) or { 'error' }
+id := nanoid.generate('erzurum', 25)
 ```
 
 ## Contribution
